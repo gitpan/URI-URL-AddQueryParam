@@ -10,7 +10,7 @@ use URI::QueryParam;
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(http_add_query_param);
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub http_add_query_param
 {
