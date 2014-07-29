@@ -10,7 +10,7 @@ use URI::QueryParam;
 require Exporter;
 our @ISA = qw(Exporter);
 our @EXPORT_OK = qw(http_add_query_param);
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub http_add_query_param
 {
@@ -18,7 +18,7 @@ sub http_add_query_param
 	my $hashref_add_query_param = shift;
 
 	my $obj_url = URI::URL->new($base_url);
-	foreach (keys %$hashref_add_query_param)
+	foreach (sort keys %$hashref_add_query_param)
 	{
 		$obj_url->query_param_append($_, $$hashref_add_query_param{$_});
 	}
@@ -41,10 +41,12 @@ URI::URL::AddQueryParam - Add Query Param after HTTP URL
   my %http_param = ('ta' => 'ok', 'foobar' => 1, 'hoge' => 0);
   my $base_url = 'http://example.com/';
   print http_add_query_param($base_url, \%http_param);
+  # got 'http://example.com/?ta=ok&hoge=0&foobar=1'
 
   %http_param = ('ta' => 'ok', 'foobar' => 1, 'hoge' => 0);
   $base_url = 'http://example.com?soso=gogo';
   print http_add_query_param($base_url, \%http_param);
+  # got 'http://example.com/tt3.php?soso=gogo&ta=ok&hoge=0&foobar=1'
 
 =head1 DESCRIPTION
 
